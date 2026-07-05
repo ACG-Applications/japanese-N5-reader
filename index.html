@@ -5,23 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>JLPT N5 Reading & Comprehension - Kenji's Tokyo School Days</title>
 
+    <!-- ============================================================
+    PWA CONFIGURATION
+    ============================================================ -->
+    
+    <!-- Manifest for PWA -->
+    <link rel="manifest" href="/japanese-N5-reader/manifest.json" />
+    
+    <!-- Theme color for browser -->
+    <meta name="theme-color" content="#e74c3c" />
+    
+    <!-- Apple touch icon for iOS -->
+    <link rel="apple-touch-icon" href="/japanese-N5-reader/icon-192x192.png" />
+    
+    <!-- Windows tile color -->
+    <meta name="msapplication-TileColor" content="#e74c3c" />
+
     <!-- Google Fonts for Japanese support -->
     <link
       href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap"
       rel="stylesheet"
     />
 
-    <!-- Manifest for PWA -->
-    <link rel="manifest" href="manifest.json" />
-
-    <!-- Theme color for browser -->
-    <meta name="theme-color" content="#e74c3c" />
-
-    <!-- Apple touch icon (iOS) -->
-    <link rel="apple-touch-icon" href="icon-192x192.png" />
-
     <!-- Stylesheet -->
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="/japanese-N5-reader/style.css" />
 
     <!-- Favicon -->
     <link
@@ -33,7 +40,7 @@
     <script>
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', function() {
-          navigator.serviceWorker.register('sw.js')
+          navigator.serviceWorker.register('/japanese-N5-reader/sw.js')
             .then(function(registration) {
               console.log('✅ Service Worker registered successfully:', registration.scope);
             })
@@ -168,7 +175,7 @@
         <!-- Install Button (hidden by default, shows when PWA is installable) -->
         <div class="controls-group" style="border-right: none; padding-right: 0;">
           <button id="install-btn" style="display: none; background: #27ae60; color: white; border: none; border-radius: 6px; padding: 6px 14px; cursor: pointer; font-weight: 600; font-size: var(--font-sm);">
-            📲 Install
+            📲 Install App
           </button>
         </div>
       </div>
@@ -257,7 +264,7 @@
     ============================================================ -->
 
     <!-- 1. DATA (MUST LOAD FIRST - ONLY ONCE) -->
-    <script src="data.js"></script>
+    <script src="/japanese-N5-reader/data.js"></script>
 
     <!-- Verify data loaded -->
     <script>
@@ -282,19 +289,19 @@
     </script>
 
     <!-- 2. FURIGANA ENGINE -->
-    <script src="furigana.js"></script>
+    <script src="/japanese-N5-reader/furigana.js"></script>
 
     <!-- 3. GRAMMAR PATTERN DETECTOR -->
-    <script src="grammar-patterns.js"></script>
+    <script src="/japanese-N5-reader/grammar-patterns.js"></script>
 
     <!-- 4. ANALYTICS -->
-    <script src="analytics.js"></script>
+    <script src="/japanese-N5-reader/analytics.js"></script>
 
     <!-- 5. GRAMMAR GAME -->
-    <script src="grammar-game.js"></script>
+    <script src="/japanese-N5-reader/grammar-game.js"></script>
 
     <!-- 6. MAIN APP (LOAD LAST) -->
-    <script src="app.js"></script>
+    <script src="/japanese-N5-reader/app.js"></script>
 
     <!-- ============================================================
     INITIALIZATION CHECK
@@ -354,47 +361,47 @@
     </script>
 
     <!-- ============================================================
-    PWA INSTALL PROMPT
+    PWA INSTALL SCRIPT
     ============================================================ -->
     <script>
       // PWA Install Prompt
       let deferredPrompt;
 
       window.addEventListener('beforeinstallprompt', (e) => {
-        // Prevent Chrome 67 and earlier from automatically showing the prompt
         e.preventDefault();
-        // Stash the event so it can be triggered later
         deferredPrompt = e;
         console.log('✅ App can be installed');
-
-        // Show the install button
+        
+        // Show install button
         const installBtn = document.getElementById('install-btn');
         if (installBtn) {
           installBtn.style.display = 'inline-block';
+          installBtn.textContent = '📲 Install App';
         }
       });
 
-      // Handle install button click
-      document.getElementById('install-btn')?.addEventListener('click', () => {
-        if (deferredPrompt) {
-          deferredPrompt.prompt();
-          deferredPrompt.userChoice.then((choiceResult) => {
-            if (choiceResult.outcome === 'accepted') {
-              console.log('✅ User accepted the install prompt');
-            } else {
-              console.log('❌ User dismissed the install prompt');
-            }
-            deferredPrompt = null;
-            // Hide the install button
-            const installBtn = document.getElementById('install-btn');
-            if (installBtn) {
-              installBtn.style.display = 'none';
+      // Install button click handler
+      document.addEventListener('DOMContentLoaded', function() {
+        const installBtn = document.getElementById('install-btn');
+        if (installBtn) {
+          installBtn.addEventListener('click', function() {
+            if (deferredPrompt) {
+              deferredPrompt.prompt();
+              deferredPrompt.userChoice.then((choiceResult) => {
+                if (choiceResult.outcome === 'accepted') {
+                  console.log('✅ User accepted install');
+                } else {
+                  console.log('❌ User dismissed install');
+                }
+                deferredPrompt = null;
+                installBtn.style.display = 'none';
+              });
             }
           });
         }
       });
 
-      // App installed successfully
+      // App installed
       window.addEventListener('appinstalled', () => {
         console.log('✅ App installed successfully');
         const installBtn = document.getElementById('install-btn');
@@ -406,7 +413,7 @@
       // Service Worker registration (already registered above, but keep for redundancy)
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', function() {
-          navigator.serviceWorker.register('sw.js')
+          navigator.serviceWorker.register('/japanese-N5-reader/sw.js')
             .then(function(registration) {
               console.log('✅ Service Worker registered:', registration.scope);
             })

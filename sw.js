@@ -3,32 +3,29 @@
    Enables offline support and caching for GitHub Pages
    ============================================================ */
 
-// ============================================================
-// CONSTANTS
-// ============================================================
-
 const CACHE_NAME = 'jlpt-n5-reader-v2.0.0';
-const OFFLINE_URL = 'offline.html';
+const OFFLINE_URL = '/japanese-N5-reader/offline.html';
 
 // Files to cache for offline use
 const PRECACHE_URLS = [
-  '/',
-  '/index.html',
-  '/offline.html',
-  '/style.css',
-  '/app.js',
-  '/data.js',
-  '/grammar-patterns.js',
-  '/analytics.js',
-  '/grammar-game.js',
-  '/furigana.js',
-  '/favicon.ico',
-  '/icon-48x48.png',
-  '/icon-72x72.png',
-  '/icon-96x96.png',
-  '/icon-192x192.png',
-  '/icon-512x512.png',
-  '/manifest.json'
+  '/japanese-N5-reader/',
+  '/japanese-N5-reader/index.html',
+  '/japanese-N5-reader/offline.html',
+  '/japanese-N5-reader/404.html',
+  '/japanese-N5-reader/style.css',
+  '/japanese-N5-reader/app.js',
+  '/japanese-N5-reader/data.js',
+  '/japanese-N5-reader/grammar-patterns.js',
+  '/japanese-N5-reader/analytics.js',
+  '/japanese-N5-reader/grammar-game.js',
+  '/japanese-N5-reader/furigana.js',
+  '/japanese-N5-reader/favicon.ico',
+  '/japanese-N5-reader/icon-48x48.png',
+  '/japanese-N5-reader/icon-72x72.png',
+  '/japanese-N5-reader/icon-96x96.png',
+  '/japanese-N5-reader/icon-192x192.png',
+  '/japanese-N5-reader/icon-512x512.png',
+  '/japanese-N5-reader/manifest.json'
 ];
 
 // ============================================================
@@ -79,7 +76,7 @@ self.addEventListener('activate', (event) => {
 });
 
 // ============================================================
-// FETCH STRATEGY: Stale-While-Revalidate
+// FETCH STRATEGY
 // ============================================================
 
 self.addEventListener('fetch', (event) => {
@@ -96,12 +93,11 @@ self.addEventListener('fetch', (event) => {
     return;
   }
   
-  // Skip browser extensions and analytics
+  // Skip browser extensions
   if (url.pathname.startsWith('/_') || url.pathname.includes('chrome-extension')) {
     return;
   }
   
-  // Stale-while-revalidate strategy for everything
   event.respondWith(
     caches.open(CACHE_NAME)
       .then((cache) => {
@@ -133,10 +129,9 @@ self.addEventListener('fetch', (event) => {
 });
 
 // ============================================================
-// INSTALL PROMPT HANDLING (Client-side)
+// MESSAGE HANDLING
 // ============================================================
 
-// Listen for messages from the client
 self.addEventListener('message', (event) => {
   if (event.data && event.data.type === 'SKIP_WAITING') {
     self.skipWaiting();
@@ -156,20 +151,6 @@ self.addEventListener('message', (event) => {
 });
 
 // ============================================================
-// BACKGROUND SYNC (Optional)
-// ============================================================
-
-self.addEventListener('sync', (event) => {
-  if (event.tag === 'sync-progress') {
-    event.waitUntil(syncProgress());
-  }
-});
-
-async function syncProgress() {
-  console.log('[ServiceWorker] Syncing progress...');
-}
-
-// ============================================================
 // PUSH NOTIFICATIONS (Optional)
 // ============================================================
 
@@ -178,11 +159,11 @@ self.addEventListener('push', (event) => {
   
   const options = {
     body: data.body || 'Time to practice Japanese! 📚',
-    icon: 'icon-192x192.png',
-    badge: 'icon-96x96.png',
+    icon: '/japanese-N5-reader/icon-192x192.png',
+    badge: '/japanese-N5-reader/icon-96x96.png',
     vibrate: [200, 100, 200],
     data: {
-      url: data.url || '/'
+      url: data.url || '/japanese-N5-reader/'
     },
     actions: [
       {
@@ -211,7 +192,7 @@ self.addEventListener('notificationclick', (event) => {
     return;
   }
   
-  const url = event.notification.data.url || '/';
+  const url = event.notification.data.url || '/japanese-N5-reader/';
   event.waitUntil(
     clients.matchAll({ type: 'window' })
       .then((clientList) => {
