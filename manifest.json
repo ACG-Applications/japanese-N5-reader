@@ -1,0 +1,120 @@
+{
+  "name": "JLPT N5 Reading & Comprehension - Kenji's Tokyo School Days",
+  "short_name": "JLPT N5 Reader",
+  "description": "Learn Japanese with Kenji's Tokyo School Days - 100 Kanji, 10 Grammar Patterns",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#f5f5f5",
+  "theme_color": "#e74c3c",
+  "orientation": "portrait-primary",
+  "categories": ["education", "language", "japanese"],
+  "lang": "en",
+  "dir": "ltr",
+  "icons": [
+    {
+      "src": "icon-48x48.png",
+      "sizes": "48x48",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-72x72.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "screenshot-desktop.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Desktop view of JLPT N5 Reading App"
+    },
+    {
+      "src": "screenshot-mobile.png",
+      "sizes": "360x640",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Mobile view of JLPT N5 Reading App"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Block 1 - The 65-Year-Old Student",
+      "short_name": "Block 1",
+      "description": "Start from the beginning",
+      "url": "?block=1",
+      "icons": [
+        {
+          "src": "icon-96x96.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Grammar Detective Game",
+      "short_name": "Grammar Game",
+      "description": "Practice identifying grammar patterns",
+      "url": "?mode=game",
+      "icons": [
+        {
+          "src": "icon-96x96.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Review Progress",
+      "short_name": "Progress",
+      "description": "Check your learning progress",
+      "url": "?mode=review",
+      "icons": [
+        {
+          "src": "icon-96x96.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Continue Learning",
+      "short_name": "Continue",
+      "description": "Pick up where you left off",
+      "url": "?continue=true",
+      "icons": [
+        {
+          "src": "icon-96x96.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false,
+  "iarc_rating_id": "",
+  "scope": ".",
+  "id": "jlpt-n5-reader"
+}

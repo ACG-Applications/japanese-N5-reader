@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Offline - JLPT N5 Reading</title>
+    
+    <!-- Google Fonts for Japanese support -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎌</text></svg>">
+    
+    <style>
+        /* ─── RESET ─── */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Segoe UI', 'Helvetica Neue', 'Noto Sans JP', Arial, sans-serif;
+            background: #f5f5f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+            margin: 0;
+        }
+        
+        .offline-container {
+            max-width: 500px;
+            width: 100%;
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            text-align: center;
+        }
+        
+        .offline-icon {
+            font-size: 72px;
+            margin-bottom: 20px;
+            display: block;
+        }
+        
+        .app-version {
+            font-size: 12px;
+            color: #888;
+            margin-top: 4px;
+        }
+        
+        h1 {
+            color: #1a1a2e;
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+        
+        p {
+            color: #555;
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .offline-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 8px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary {
+            background: #e74c3c;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #c0392b;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(231, 76, 60, 0.3);
+        }
+        
+        .btn-secondary {
+            background: #e0e0e0;
+            color: #333;
+        }
+        
+        .btn-secondary:hover {
+            background: #d0d0d0;
+            transform: translateY(-2px);
+        }
+        
+        .cached-content {
+            margin-top: 20px;
+            padding: 16px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .cached-content h3 {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .cached-content ul {
+            list-style: none;
+            padding: 0;
+            text-align: left;
+        }
+        
+        .cached-content li {
+            padding: 4px 0;
+            font-size: 14px;
+            color: #333;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .cached-content li:last-child {
+            border-bottom: none;
+        }
+        
+        .status-dot {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+        
+        .status-dot.online {
+            background: #27ae60;
+        }
+        
+        .status-dot.offline {
+            background: #e74c3c;
+        }
+        
+        .app-name {
+            font-size: 20px;
+            font-weight: 700;
+            color: #e74c3c;
+        }
+        
+        @media (max-width: 600px) {
+            .offline-container {
+                padding: 24px;
+            }
+            
+            .offline-icon {
+                font-size: 48px;
+            }
+            
+            h1 {
+                font-size: 22px;
+            }
+        }
+        
+        /* Dark mode support */
+        @media (prefers-color-scheme: dark) {
+            body {
+                background: #1a1a2e;
+            }
+            
+            .offline-container {
+                background: #16213e;
+            }
+            
+            h1 {
+                color: #e8e8e8;
+            }
+            
+            p {
+                color: #b0b0b0;
+            }
+            
+            .btn-secondary {
+                background: #2a2a4a;
+                color: #e0e0e0;
+            }
+            
+            .btn-secondary:hover {
+                background: #3a3a5a;
+            }
+            
+            .cached-content {
+                background: #1e2a45;
+                border-color: #2a2a4a;
+            }
+            
+            .cached-content h3 {
+                color: #999;
+            }
+            
+            .cached-content li {
+                color: #e0e0e0;
+                border-bottom-color: #2a2a4a;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="offline-container">
+        <span class="offline-icon">📶</span>
+        <div class="app-name">JLPT N5 Reading</div>
+        <div class="app-version">Version 2.0.0</div>
+        <h1>You're Offline</h1>
+        <p>
+            Don't worry! You can still access previously loaded content.
+            <br>
+            <span style="font-size: 14px; color: #888;">
+                Check your internet connection to load new content.
+            </span>
+        </p>
+        
+        <div class="offline-actions">
+            <a href="index.html" class="btn btn-primary">
+                📚 Go to App
+            </a>
+            <button class="btn btn-secondary" onclick="location.reload()">
+                🔄 Retry Connection
+            </button>
+        </div>
+        
+        <div class="cached-content" id="cached-content">
+            <h3>📖 Cached Content Available</h3>
+            <ul>
+                <li>
+                    <span class="status-dot online"></span>
+                    All 10 Story Blocks
+                </li>
+                <li>
+                    <span class="status-dot online"></span>
+                    100 Kanji Characters
+                </li>
+                <li>
+                    <span class="status-dot online"></span>
+                    10 Grammar Patterns
+                </li>
+                <li>
+                    <span class="status-dot online"></span>
+                    Complete Quiz System
+                </li>
+                <li>
+                    <span class="status-dot online"></span>
+                    Grammar Detective Game
+                </li>
+            </ul>
+            <p style="font-size: 13px; color: #888; margin-top: 12px; margin-bottom: 0;">
+                Your progress is saved locally and will sync when you're back online.
+            </p>
+        </div>
+    </div>
+    
+    <script>
+        // Check if we're actually offline or just a failed fetch
+        if (navigator.onLine) {
+            // If online but got here, something else failed
+            document.querySelector('.offline-icon').textContent = '⚠️';
+            document.querySelector('h1').textContent = 'Something Went Wrong';
+            document.querySelector('p').innerHTML = `
+                You appear to be online, but the page couldn't load properly.
+                <br>
+                <span style="font-size: 14px; color: #888;">
+                    Try refreshing or check your connection.
+                </span>
+            `;
+            document.querySelector('.offline-actions').innerHTML = `
+                <button class="btn btn-primary" onclick="location.reload()">
+                    🔄 Refresh Page
+                </button>
+                <a href="index.html" class="btn btn-secondary">
+                    📚 Go to App
+                </a>
+            `;
+        }
+        
+        // Listen for online/offline events
+        window.addEventListener('online', () => {
+            console.log('✅ Back online!');
+        });
+        
+        window.addEventListener('offline', () => {
+            console.log('📶 Network connection lost');
+        });
+    </script>
+</body>
+</html>

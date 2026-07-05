@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JLPT N5 Reading & Comprehension - Kenji's Tokyo School Days</title>
+
+    <!-- Google Fonts for Japanese support -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css" />
+
+    <!-- Favicon (optional) -->
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎌</text></svg>"
+    />
+  </head>
+  <body>
+    <!-- ============================================================
+    MAIN APP CONTAINER
+    ============================================================ -->
+    <div id="app">
+      <!-- ──────────────────────────────────────────────────────────
+        HEADER
+        ────────────────────────────────────────────────────────── -->
+      <header class="app-header">
+        <div>
+          <h1>
+            📚 Kenji's Tokyo School Days
+            <span class="subtitle">健二さんの東京の学校</span>
+          </h1>
+          <div
+            style="
+              font-size: var(--font-sm);
+              color: var(--text-muted);
+              margin-top: var(--spacing-xs);
+            "
+          >
+            JLPT N5 · 100 Kanji · 10 Blocks
+          </div>
+        </div>
+
+        <div class="block-selector-wrapper">
+          <label for="block-selector">Block:</label>
+          <select id="block-selector">
+            <option value="1">1: The 65-Year-Old Student</option>
+            <option value="2">2: The Daily Morning Walk</option>
+            <option value="3">3: Navigating the Classroom</option>
+            <option value="4">4: Finding a New Apartment</option>
+            <option value="5">5: The Language Lessons Begin</option>
+            <option value="6">6: Studying Hard in Class</option>
+            <option value="7">7: Buying Coffee and Counting Change</option>
+            <option value="8">8: Calling the Family Back Home</option>
+            <option value="9">9: A Rainy Commute</option>
+            <option value="10">10: After-School Socializing</option>
+          </select>
+        </div>
+      </header>
+
+      <!-- ──────────────────────────────────────────────────────────
+        CONTROLS BAR
+        ────────────────────────────────────────────────────────── -->
+      <div class="controls-bar">
+        <!-- Furigana Toggle -->
+        <div class="controls-group">
+          <label>
+            <span>🔤 Furigana</span>
+            <div class="toggle-switch">
+              <input type="checkbox" id="furigana-toggle" checked />
+              <span class="toggle-slider"></span>
+            </div>
+          </label>
+        </div>
+
+        <!-- Translation Toggle -->
+        <div class="controls-group">
+          <label>
+            <span>🌐 Translation</span>
+            <div class="toggle-switch">
+              <input type="checkbox" id="translation-toggle" />
+              <span class="toggle-slider"></span>
+            </div>
+          </label>
+        </div>
+
+        <!-- Grammar Toggle -->
+        <div class="controls-group">
+          <label>
+            <span>📘 Grammar</span>
+            <div class="toggle-switch">
+              <input type="checkbox" id="grammar-toggle" />
+              <span class="toggle-slider"></span>
+            </div>
+          </label>
+        </div>
+
+        <!-- Dark Mode Toggle -->
+        <div class="controls-group">
+          <label>
+            <span>🌙 Dark</span>
+            <div class="toggle-switch">
+              <input type="checkbox" id="dark-mode-toggle" />
+              <span class="toggle-slider"></span>
+            </div>
+          </label>
+        </div>
+
+        <!-- TTS Speed -->
+        <div class="controls-group">
+          <label for="tts-speed">⏱️ Speed:</label>
+          <select id="tts-speed">
+            <option value="0.75">0.75x</option>
+            <option value="1.0" selected>1.0x</option>
+            <option value="1.5">1.5x</option>
+          </select>
+        </div>
+
+        <!-- Mode Selector -->
+        <div class="controls-group">
+          <label for="mode-selector">🎮 Mode:</label>
+          <select id="mode-selector">
+            <option value="read">📖 Read & Quiz</option>
+            <option value="game">🎯 Grammar Detective</option>
+            <option value="review">📊 Review</option>
+          </select>
+        </div>
+
+        <!-- TTS Controls -->
+<!-- TTS Controls - Simplified: Play & Stop only -->
+<div class="controls-group tts-controls" style="flex: 1">
+  <button class="btn btn-primary btn-sm" id="tts-play">
+    🔊 Play Story
+  </button>
+  <button class="btn btn-secondary btn-sm" id="tts-stop">⏹️</button>
+  <div class="tts-progress-bar">
+    <div class="tts-progress-fill" id="tts-progress"></div>
+  </div>
+</div>
+      </div>
+
+      <!-- ──────────────────────────────────────────────────────────
+        KEYBOARD SHORTCUTS HINT
+        ────────────────────────────────────────────────────────── -->
+      <div
+        style="
+          font-size: var(--font-xs);
+          color: var(--text-muted);
+          text-align: center;
+          margin-bottom: var(--spacing-md);
+        "
+      >
+        ⌨️ Keyboard: 1-9 = Blocks · Space = Play TTS · F = Furigana · T =
+        Translation · G = Grammar · Enter = Submit · H = Hint
+      </div>
+
+      <!-- ──────────────────────────────────────────────────────────
+        MAIN CONTENT AREA
+        ────────────────────────────────────────────────────────── -->
+      <main>
+        <!-- ── KANJI LIST ── -->
+        <section class="kanji-section" id="kanji-list">
+          <!-- Dynamically populated -->
+        </section>
+
+        <!-- ── STORY ── -->
+        <section class="story-container" id="story-container">
+          <!-- Dynamically populated -->
+        </section>
+
+        <!-- ── QUIZ ── -->
+        <section class="quiz-container" id="quiz-container">
+          <!-- Dynamically populated -->
+        </section>
+
+        <!-- ── GRAMMAR ── -->
+        <section class="grammar-container" id="grammar-container">
+          <!-- Dynamically populated -->
+        </section>
+
+        <!-- ── GAME ── -->
+        <section class="game-container" id="game-container">
+          <!-- Dynamically populated -->
+        </section>
+
+        <!-- ── PROGRESS ── -->
+        <section class="progress-display" id="progress-display">
+          <!-- Dynamically populated -->
+        </section>
+
+        <!-- ── STATS ── -->
+        <section class="stats-display" id="score-display">
+          <!-- Dynamically populated -->
+        </section>
+      </main>
+
+      <!-- ──────────────────────────────────────────────────────────
+        FOOTER
+        ────────────────────────────────────────────────────────── -->
+      <footer
+        style="
+          text-align: center;
+          padding: var(--spacing-lg);
+          color: var(--text-muted);
+          font-size: var(--font-sm);
+          border-top: 1px solid var(--border-light);
+          margin-top: var(--spacing-xl);
+        "
+      >
+        <p>
+          🎌 JLPT N5 Reading & Comprehension App ·
+          <span id="block-counter">Block 1 of 10</span> ·
+          <span id="kanji-counter">0/100 Kanji</span>
+        </p>
+        <p style="font-size: var(--font-xs); margin-top: var(--spacing-xs)">
+          Data loaded: <span id="data-status">Loading...</span> · Version 2.0.0
+        </p>
+      </footer>
+    </div>
+
+    <!-- ============================================================
+    SCRIPTS - LOAD IN CORRECT ORDER
+    ============================================================ -->
+
+    <!-- 1. DATA (MUST LOAD FIRST - ONLY ONCE) -->
+    <script src="data.js"></script>
+
+    <!-- Verify data loaded -->
+    <script>
+      console.log("🔍 Checking data.js...");
+      if (typeof appData !== "undefined" && appData) {
+        console.log("✅ Data loaded:", appData.blocks?.length || 0, "blocks");
+        console.log(
+          "✅ Patterns:",
+          appData.grammarPatterns?.length || 0,
+          "patterns",
+        );
+      } else {
+        console.error("❌ data.js failed to load!");
+        document.body.innerHTML = `
+            <div style="padding: 40px; text-align: center; font-family: sans-serif;">
+                <h1 style="color: #e74c3c;">⚠️ Data Load Error</h1>
+                <p>data.js failed to load. Please check the file exists and is valid.</p>
+                <p style="color: #666; font-size: 14px;">Check the console for more details.</p>
+            </div>
+        `;
+      }
+    </script>
+
+    <!-- 2. FURIGANA ENGINE -->
+    <script src="furigana.js"></script>
+
+    <!-- 3. GRAMMAR PATTERN DETECTOR -->
+    <script src="grammar-patterns.js"></script>
+
+    <!-- 4. ANALYTICS -->
+    <script src="analytics.js"></script>
+
+    <!-- 5. GRAMMAR GAME -->
+    <script src="grammar-game.js"></script>
+
+    <!-- 6. MAIN APP (LOAD LAST) -->
+    <script src="app.js"></script>
+
+    <!-- ============================================================
+    INITIALIZATION CHECK
+    ============================================================ -->
+    <script>
+      // Check if data loaded successfully
+      document.addEventListener("DOMContentLoaded", function () {
+        const statusEl = document.getElementById("data-status");
+
+        if (typeof appData !== "undefined" && appData) {
+          statusEl.textContent = `✅ Loaded (${appData.blocks?.length || 0} blocks, ${appData.grammarPatterns?.length || 0} patterns)`;
+          statusEl.style.color = "#27ae60";
+
+          // Update counters
+          const totalKanji =
+            appData.blocks?.reduce(
+              (sum, b) => sum + (b.kanjiList?.length || 0),
+              0,
+            ) || 0;
+          document.getElementById("kanji-counter").textContent =
+            `0/${totalKanji} Kanji`;
+          document.getElementById("block-counter").textContent =
+            "Block 1 of 10";
+        } else {
+          statusEl.textContent = "❌ Failed to load data. Check data.js";
+          statusEl.style.color = "#e74c3c";
+        }
+      });
+
+      // Debug helper - expose data to console
+      window.debugApp = function () {
+        console.log(
+          "📊 App Data:",
+          typeof appData !== "undefined" ? appData : "Not loaded",
+        );
+        console.log(
+          "🔍 Detector:",
+          typeof GrammarPatternDetector !== "undefined"
+            ? "Loaded"
+            : "Not loaded",
+        );
+        console.log(
+          "📈 Analytics:",
+          typeof LearningAnalytics !== "undefined" ? "Loaded" : "Not loaded",
+        );
+        console.log(
+          "🎮 Game:",
+          typeof GrammarGame !== "undefined" ? "Loaded" : "Not loaded",
+        );
+        console.log(
+          "🚀 App:",
+          typeof app !== "undefined" ? app : "Not initialized",
+        );
+      };
+
+      console.log("💡 Run debugApp() in console to check status");
+    </script>
+  </body>
+</html>

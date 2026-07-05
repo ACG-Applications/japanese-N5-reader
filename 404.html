@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Not Found - JLPT N5 Reading</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Segoe UI', 'Helvetica Neue', 'Noto Sans JP', Arial, sans-serif;
+            background: #f5f5f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+            margin: 0;
+        }
+        
+        .error-container {
+            max-width: 500px;
+            width: 100%;
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            text-align: center;
+        }
+        
+        .error-icon {
+            font-size: 72px;
+            margin-bottom: 20px;
+            display: block;
+        }
+        
+        h1 {
+            color: #1a1a2e;
+            font-size: 28px;
+            margin-bottom: 12px;
+        }
+        
+        .error-code {
+            color: #e74c3c;
+            font-weight: 700;
+            font-size: 48px;
+            display: block;
+            margin-bottom: 8px;
+        }
+        
+        p {
+            color: #555;
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary {
+            background: #e74c3c;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #c0392b;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(231, 76, 60, 0.3);
+        }
+        
+        .btn-secondary {
+            background: #e0e0e0;
+            color: #333;
+        }
+        
+        .btn-secondary:hover {
+            background: #d0d0d0;
+            transform: translateY(-2px);
+        }
+        
+        .suggestions {
+            margin-top: 20px;
+            padding: 16px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+            text-align: left;
+        }
+        
+        .suggestions h3 {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .suggestions ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .suggestions li {
+            padding: 4px 0;
+            font-size: 14px;
+            color: #333;
+        }
+        
+        .suggestions li a {
+            color: #e74c3c;
+            text-decoration: none;
+        }
+        
+        .suggestions li a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 600px) {
+            .error-container {
+                padding: 24px;
+            }
+            
+            .error-icon {
+                font-size: 48px;
+            }
+            
+            h1 {
+                font-size: 22px;
+            }
+            
+            .error-code {
+                font-size: 36px;
+            }
+        }
+        
+        @media (prefers-color-scheme: dark) {
+            body {
+                background: #1a1a2e;
+            }
+            
+            .error-container {
+                background: #16213e;
+            }
+            
+            h1 {
+                color: #e8e8e8;
+            }
+            
+            p {
+                color: #b0b0b0;
+            }
+            
+            .btn-secondary {
+                background: #2a2a4a;
+                color: #e0e0e0;
+            }
+            
+            .btn-secondary:hover {
+                background: #3a3a5a;
+            }
+            
+            .suggestions {
+                background: #1e2a45;
+                border-color: #2a2a4a;
+            }
+            
+            .suggestions h3 {
+                color: #999;
+            }
+            
+            .suggestions li {
+                color: #e0e0e0;
+            }
+            
+            .suggestions li a {
+                color: #ff6b6b;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="error-container">
+        <span class="error-icon">🔍</span>
+        <span class="error-code">404</span>
+        <h1>Page Not Found</h1>
+        <p>
+            The page you're looking for doesn't exist or has been moved.
+            <br>
+            <span style="font-size: 14px; color: #888;">
+                But don't worry, you can still continue learning Japanese!
+            </span>
+        </p>
+        
+        <div class="suggestions">
+            <h3>📚 Try These Instead</h3>
+            <ul>
+                <li>🏠 <a href="index.html">Go to Homepage</a></li>
+                <li>📖 <a href="index.html?block=1">Start from Block 1</a></li>
+                <li>🎯 <a href="index.html?mode=game">Play Grammar Detective</a></li>
+                <li>📊 <a href="index.html?mode=review">Check Your Progress</a></li>
+            </ul>
+        </div>
+        
+        <div style="margin-top: 20px;">
+            <a href="index.html" class="btn btn-primary">
+                🏠 Go to App
+            </a>
+        </div>
+    </div>
+</body>
+</html>
