@@ -2,7 +2,7 @@
   "name": "JLPT N5 Reading & Comprehension - Kenji's Tokyo School Days",
   "short_name": "JLPT N5 Reader",
   "description": "Learn Japanese with Kenji's Tokyo School Days - 100 Kanji, 10 Grammar Patterns",
-  "start_url": ".",
+  "start_url": "/index.html",
   "display": "standalone",
   "background_color": "#f5f5f5",
   "theme_color": "#e74c3c",
@@ -63,7 +63,7 @@
       "name": "Block 1 - The 65-Year-Old Student",
       "short_name": "Block 1",
       "description": "Start from the beginning",
-      "url": "?block=1",
+      "url": "/index.html?block=1",
       "icons": [
         {
           "src": "icon-96x96.png",
@@ -76,7 +76,7 @@
       "name": "Grammar Detective Game",
       "short_name": "Grammar Game",
       "description": "Practice identifying grammar patterns",
-      "url": "?mode=game",
+      "url": "/index.html?mode=game",
       "icons": [
         {
           "src": "icon-96x96.png",
@@ -89,7 +89,7 @@
       "name": "Review Progress",
       "short_name": "Progress",
       "description": "Check your learning progress",
-      "url": "?mode=review",
+      "url": "/index.html?mode=review",
       "icons": [
         {
           "src": "icon-96x96.png",
@@ -102,7 +102,7 @@
       "name": "Continue Learning",
       "short_name": "Continue",
       "description": "Pick up where you left off",
-      "url": "?continue=true",
+      "url": "/index.html?continue=true",
       "icons": [
         {
           "src": "icon-96x96.png",
@@ -114,7 +114,6 @@
   ],
   "related_applications": [],
   "prefer_related_applications": false,
-  "iarc_rating_id": "",
-  "scope": ".",
+  "scope": "/",
   "id": "jlpt-n5-reader"
 }

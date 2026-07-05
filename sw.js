@@ -7,35 +7,27 @@
 // CONSTANTS
 // ============================================================
 
-const CACHE_NAME = 'jlpt-n5-reader-v1.0.0';
+const CACHE_NAME = 'jlpt-n5-reader-v2.0.0';
 const OFFLINE_URL = 'offline.html';
 
 // Files to cache for offline use
 const PRECACHE_URLS = [
-  // Core HTML
   '/',
   '/index.html',
   '/offline.html',
-  
-  // Styles
   '/style.css',
-  
-  // JavaScript
   '/app.js',
   '/data.js',
   '/grammar-patterns.js',
   '/analytics.js',
   '/grammar-game.js',
-  
-  // Icons
+  '/furigana.js',
   '/favicon.ico',
   '/icon-48x48.png',
   '/icon-72x72.png',
   '/icon-96x96.png',
   '/icon-192x192.png',
   '/icon-512x512.png',
-  
-  // Manifest
   '/manifest.json'
 ];
 
@@ -109,26 +101,7 @@ self.addEventListener('fetch', (event) => {
     return;
   }
   
-  // Special handling for data.js (refresh on every request in development)
-  // In production, you might want to cache this too
-  if (url.pathname.includes('data.js')) {
-    event.respondWith(
-      fetch(request)
-        .then((response) => {
-          const clonedResponse = response.clone();
-          caches.open(CACHE_NAME).then((cache) => {
-            cache.put(request, clonedResponse);
-          });
-          return response;
-        })
-        .catch(() => {
-          return caches.match(request);
-        })
-    );
-    return;
-  }
-  
-  // Stale-while-revalidate strategy for everything else
+  // Stale-while-revalidate strategy for everything
   event.respondWith(
     caches.open(CACHE_NAME)
       .then((cache) => {
@@ -136,28 +109,23 @@ self.addEventListener('fetch', (event) => {
           .then((cachedResponse) => {
             const fetchPromise = fetch(request)
               .then((networkResponse) => {
-                // Update cache with fresh response
                 cache.put(request, networkResponse.clone());
                 return networkResponse;
               })
               .catch((error) => {
                 console.warn('[ServiceWorker] Fetch failed:', error);
-                // If offline and cached response exists, return it
                 if (cachedResponse) {
                   return cachedResponse;
                 }
-                // If offline and no cache, return offline page
                 if (request.mode === 'navigate') {
                   return cache.match(OFFLINE_URL);
                 }
-                // Return a basic error response
                 return new Response('Network error', {
                   status: 503,
                   statusText: 'Service Unavailable'
                 });
               });
             
-            // Return cached response immediately, then update in background
             return cachedResponse || fetchPromise;
           });
       })
@@ -165,9 +133,10 @@ self.addEventListener('fetch', (event) => {
 });
 
 // ============================================================
-// MESSAGE HANDLING
+// INSTALL PROMPT HANDLING (Client-side)
 // ============================================================
 
+// Listen for messages from the client
 self.addEventListener('message', (event) => {
   if (event.data && event.data.type === 'SKIP_WAITING') {
     self.skipWaiting();
@@ -184,20 +153,6 @@ self.addEventListener('message', (event) => {
         event.ports[0].postMessage({ success: false, error: error });
       });
   }
-  
-  if (event.data && event.data.type === 'GET_CACHE_SIZE') {
-    caches.open(CACHE_NAME)
-      .then((cache) => {
-        return cache.keys();
-      })
-      .then((keys) => {
-        const size = keys.length;
-        event.ports[0].postMessage({ size });
-      })
-      .catch((error) => {
-        event.ports[0].postMessage({ size: 0, error: error });
-      });
-  }
 });
 
 // ============================================================
@@ -211,8 +166,6 @@ self.addEventListener('sync', (event) => {
 });
 
 async function syncProgress() {
-  // If you want to sync progress data to a server
-  // This is a placeholder for future implementation
   console.log('[ServiceWorker] Syncing progress...');
 }
 
@@ -274,30 +227,3 @@ self.addEventListener('notificationclick', (event) => {
       })
   );
 });
-
-// ============================================================
-// VERSION CHECK
-// ============================================================
-
-self.addEventListener('fetch', (event) => {
-  // Check for update requests
-  if (event.request.url.includes('check-version')) {
-    event.respondWith(
-      new Response(JSON.stringify({
-        version: '1.0.0',
-        cacheName: CACHE_NAME,
-        timestamp: new Date().toISOString()
-      }), {
-        headers: { 'Content-Type': 'application/json' }
-      })
-    );
-  }
-});
-
-// ============================================================
-// LOGGING (Development Only)
-// ============================================================
-
-if (process.env.NODE_ENV === 'development') {
-  console.log('[ServiceWorker] Development mode enabled');
-}
