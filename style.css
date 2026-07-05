@@ -119,6 +119,7 @@ body {
   padding: var(--spacing-xl);
   transition: background var(--transition-base), color var(--transition-base);
   line-height: 1.6;
+  min-width: 320px;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -166,7 +167,6 @@ a:hover {
   align-items: center;
   justify-content: space-between;
   gap: var(--spacing-md);
-  /* Ensure header doesn't overlap with sticky bar */
   position: relative;
   z-index: 99;
 }
@@ -209,6 +209,7 @@ a:hover {
   font-size: var(--font-base);
   cursor: pointer;
   transition: border-color var(--transition-fast);
+  max-width: 280px;
 }
 
 #block-selector:hover {
@@ -240,12 +241,6 @@ a:hover {
   transition: box-shadow 0.3s ease, background 0.3s ease, border-radius 0.3s ease;
 }
 
-/* =============================================================
-   STICKY CONTROLS - Add shadow when sticky
-   START OF STICKY CONTROLS SECTION
-   ============================================================= */
-
-/* Add a subtle shadow when sticky */
 .controls-bar.is-sticky {
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
   border-radius: 0 0 var(--radius) var(--radius);
@@ -254,10 +249,6 @@ a:hover {
 body.dark-mode .controls-bar.is-sticky {
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
 }
-
-/* =============================================================
-   END OF STICKY CONTROLS SECTION
-   ============================================================= */
 
 .controls-group {
   display: flex;
@@ -368,6 +359,7 @@ body.dark-mode .controls-bar.is-sticky {
   cursor: pointer;
   transition: all var(--transition-fast);
   text-decoration: none;
+  white-space: nowrap;
 }
 
 .btn-primary {
@@ -429,6 +421,8 @@ body.dark-mode .controls-bar.is-sticky {
   display: flex;
   align-items: center;
   gap: var(--spacing-xs);
+  flex: 1;
+  min-width: 200px;
 }
 
 .tts-controls .btn {
@@ -442,7 +436,7 @@ body.dark-mode .controls-bar.is-sticky {
 
 .tts-progress-bar {
   flex: 1;
-  min-width: 100px;
+  min-width: 60px;
   height: 4px;
   background: var(--border-light);
   border-radius: 2px;
@@ -572,6 +566,7 @@ body.dark-mode @keyframes pulse-highlight {
   line-height: 1.8;
   margin-bottom: var(--spacing-xs);
   color: var(--text-primary);
+  word-wrap: break-word;
 }
 
 .sentence .japanese ruby {
@@ -618,7 +613,6 @@ body.dark-mode @keyframes pulse-highlight {
    GRAMMAR PATTERN HIGHLIGHTING (COLORS)
    ────────────────────────────────────────────────────────────── */
 
-/* Pattern colors from grammar-patterns.js */
 .pattern-g1 { border-color: #ff6b6b; }
 .pattern-g2 { border-color: #4ecdc4; }
 .pattern-g3 { border-color: #45b7d1; }
@@ -630,7 +624,6 @@ body.dark-mode @keyframes pulse-highlight {
 .pattern-g9 { border-color: #badc58; }
 .pattern-g10 { border-color: #dff9fb; }
 
-/* Pattern background highlights */
 .pattern-highlight.pattern-g1 { background: rgba(255, 107, 107, 0.15); }
 .pattern-highlight.pattern-g2 { background: rgba(78, 205, 196, 0.15); }
 .pattern-highlight.pattern-g3 { background: rgba(69, 183, 209, 0.15); }
@@ -717,11 +710,6 @@ body.dark-mode .pattern-highlight.pattern-g10 { background: rgba(223, 249, 251, 
   border-left: 3px solid var(--info);
 }
 
-/* ──────────────────────────────────────────────────────────────
-   HINT TOGGLE STYLING
-   ────────────────────────────────────────────────────────────── */
-
-/* Hint toggle styling */
 .feedback-area.hint-visible {
   display: block !important;
   background: var(--info-bg);
@@ -747,7 +735,6 @@ body.dark-mode .feedback-area.hint-visible {
   background: #2176bd;
 }
 
-/* Feedback area transitions */
 .feedback-area {
   transition: all 0.3s ease;
   display: none;
@@ -765,7 +752,6 @@ body.dark-mode .feedback-area.hint-visible {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* Quiz option hover improvements */
 .option {
   transition: all 0.2s ease;
 }
@@ -779,7 +765,6 @@ body.dark-mode .feedback-area.hint-visible {
   font-weight: 600;
 }
 
-/* Question text styling */
 .question-text p {
   font-size: var(--font-md);
   line-height: 1.8;
@@ -791,7 +776,6 @@ body.dark-mode .feedback-area.hint-visible {
   margin-top: var(--spacing-xs);
 }
 
-/* Quiz actions spacing */
 .quiz-actions {
   display: flex;
   flex-wrap: wrap;
@@ -803,7 +787,6 @@ body.dark-mode .feedback-area.hint-visible {
   min-width: 120px;
 }
 
-/* Options */
 .options-container {
   display: flex;
   flex-direction: column;
@@ -863,15 +846,6 @@ body.dark-mode .feedback-area.hint-visible {
   cursor: not-allowed;
 }
 
-/* Quiz Actions */
-.quiz-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--spacing-sm);
-  margin-top: var(--spacing-md);
-}
-
-/* Feedback Area */
 .feedback-area {
   margin-top: var(--spacing-md);
   padding: var(--spacing-md) var(--spacing-lg);
@@ -912,7 +886,6 @@ body.dark-mode .feedback-area.error { color: #ff6b6b; }
 body.dark-mode .feedback-area.warning { color: #ffd700; }
 body.dark-mode .feedback-area.info { color: #87ceeb; }
 
-/* Quiz Complete */
 .quiz-complete {
   text-align: center;
   padding: var(--spacing-xl);
@@ -1066,7 +1039,6 @@ body.dark-mode .feedback-area.info { color: #87ceeb; }
   color: var(--text-secondary);
 }
 
-/* Grammar confidence badge */
 .grammar-confidence {
   font-size: var(--font-xs);
   padding: 2px 8px;
@@ -1350,56 +1322,80 @@ body.dark-mode .progress-bar span {
 }
 
 /* ──────────────────────────────────────────────────────────────
-   RESPONSIVE DESIGN
+   RESPONSIVE DESIGN - FIXED
    ────────────────────────────────────────────────────────────── */
 
-@media (max-width: 900px) {
+/* Desktop first - no changes needed */
+
+/* Tablets and smaller desktops */
+@media (max-width: 1024px) {
   body {
     padding: var(--spacing-md);
   }
-
+  
+  .app-header {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  
   .controls-bar {
-    flex-direction: column;
-    align-items: stretch;
-    gap: var(--spacing-sm);
+    padding: var(--spacing-sm) var(--spacing-md);
   }
-
+  
   .controls-group {
-    border-right: none;
-    padding-right: 0;
-    border-bottom: 1px solid var(--border-light);
-    padding-bottom: var(--spacing-sm);
+    padding-right: var(--spacing-md);
   }
+}
 
-  .controls-group:last-child {
-    border-bottom: none;
-    padding-bottom: 0;
+/* Tablets */
+@media (max-width: 768px) {
+  body {
+    padding: var(--spacing-md);
   }
-
-  .game-options {
-    grid-template-columns: 1fr;
-  }
-
+  
   .app-header {
     flex-direction: column;
     align-items: stretch;
     text-align: center;
+    padding: var(--spacing-md);
   }
-
-  .block-selector-wrapper {
-    justify-content: center;
-  }
-}
-
-@media (max-width: 600px) {
-  body {
-    padding: var(--spacing-sm);
-  }
-
+  
   .app-header h1 {
     font-size: var(--font-lg);
   }
-
+  
+  .block-selector-wrapper {
+    justify-content: center;
+  }
+  
+  #block-selector {
+    max-width: 100%;
+  }
+  
+  .controls-bar {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: var(--spacing-sm);
+    gap: var(--spacing-sm);
+  }
+  
+  .controls-group {
+    border-right: none;
+    padding-right: 0;
+    padding-bottom: var(--spacing-sm);
+    border-bottom: 1px solid var(--border-light);
+  }
+  
+  .controls-group:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+  
+  .game-options {
+    grid-template-columns: 1fr;
+  }
+  
   .story-container,
   .quiz-container,
   .grammar-container,
@@ -1410,88 +1406,267 @@ body.dark-mode .progress-bar span {
   .kanji-section {
     padding: var(--spacing-md);
   }
-
+  
   .stats-grid {
     grid-template-columns: repeat(2, 1fr);
   }
-
-  .game-options {
-    grid-template-columns: 1fr;
-  }
-
+  
   .tts-controls {
-    flex-wrap: wrap;
-  }
-
-  .tts-progress-bar {
-    min-width: 60px;
-  }
-
-  .quiz-actions {
-    flex-direction: column;
-  }
-
-  .quiz-actions .btn {
-    width: 100%;
+    flex: 1 1 100%;
     justify-content: center;
   }
-
-  .options-container {
-    gap: var(--spacing-xs);
+  
+  .tts-progress-bar {
+    min-width: 80px;
   }
-
-  .option {
-    padding: var(--spacing-xs) var(--spacing-sm);
-  }
-
-  .sentence .japanese {
-    font-size: var(--font-base);
-  }
-
-  .sentence .japanese rt {
-    font-size: 0.5em;
-  }
-
-  .kanji-grid {
-    gap: var(--spacing-xs);
-  }
-
-  .kanji-item {
-    width: 36px;
-    height: 36px;
-    font-size: var(--font-md);
-  }
-
-  .score-circle {
-    width: 80px;
-    height: 80px;
-  }
-
-  .score-number {
-    font-size: var(--font-xl);
-  }
-
+  
   .grammar-header {
     flex-direction: column;
     align-items: flex-start;
   }
+}
 
-  /* =============================================================
-     STICKY CONTROLS - Mobile Responsive
-     START OF STICKY CONTROLS SECTION
-     ============================================================= */
+/* Mobile phones */
+@media (max-width: 480px) {
+  body {
+    padding: var(--spacing-sm);
+  }
+  
+  .app-header h1 {
+    font-size: var(--font-md);
+  }
+  
+  .app-header .subtitle {
+    display: block;
+    margin-left: 0;
+    font-size: var(--font-xs);
+  }
+  
   .controls-bar {
-    padding: var(--spacing-sm) var(--spacing-md);
-    gap: var(--spacing-sm);
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--spacing-xs);
+    padding: var(--spacing-sm);
     border-radius: 0 0 var(--radius) var(--radius);
   }
   
   .controls-bar.is-sticky {
     border-radius: 0;
   }
-  /* =============================================================
-     END OF STICKY CONTROLS SECTION
-     ============================================================= */
+  
+  .controls-group {
+    flex-wrap: wrap;
+    justify-content: center;
+    border-bottom: 1px solid var(--border-light);
+    padding-bottom: var(--spacing-xs);
+    padding-right: 0;
+  }
+  
+  .controls-group label {
+    font-size: var(--font-xs);
+  }
+  
+  .controls-group:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+  
+  .toggle-switch {
+    width: 34px;
+    height: 20px;
+  }
+  
+  .toggle-slider::before {
+    height: 14px;
+    width: 14px;
+    left: 3px;
+    bottom: 3px;
+  }
+  
+  .toggle-switch input:checked + .toggle-slider::before {
+    transform: translateX(14px);
+  }
+  
+  #tts-speed,
+  #mode-selector {
+    font-size: var(--font-xs);
+    padding: 2px 6px;
+  }
+  
+  .btn {
+    font-size: var(--font-xs);
+    padding: var(--spacing-xs) var(--spacing-sm);
+  }
+  
+  .btn-sm {
+    font-size: var(--font-xs);
+    padding: 2px 8px;
+  }
+  
+  #tts-play {
+    min-width: 60px;
+    font-size: var(--font-xs);
+  }
+  
+  .story-container,
+  .quiz-container,
+  .grammar-container,
+  .game-container,
+  .progress-display,
+  .stats-display,
+  .kanji-section {
+    padding: var(--spacing-sm);
+    border-radius: var(--radius-sm);
+  }
+  
+  .sentence .japanese {
+    font-size: var(--font-base);
+  }
+  
+  .sentence .japanese rt {
+    font-size: 0.45em;
+  }
+  
+  .sentence .translation {
+    font-size: var(--font-sm);
+    padding-left: var(--spacing-sm);
+  }
+  
+  .kanji-grid {
+    gap: var(--spacing-xs);
+  }
+  
+  .kanji-item {
+    width: 32px;
+    height: 32px;
+    font-size: var(--font-md);
+  }
+  
+  .options-container {
+    gap: var(--spacing-xs);
+  }
+  
+  .option {
+    padding: var(--spacing-xs) var(--spacing-sm);
+  }
+  
+  .option label {
+    font-size: var(--font-base);
+  }
+  
+  .option input[type="radio"] {
+    width: 16px;
+    height: 16px;
+  }
+  
+  .quiz-actions {
+    flex-direction: column;
+  }
+  
+  .quiz-actions .btn {
+    width: 100%;
+    justify-content: center;
+    min-width: unset;
+  }
+  
+  .stats-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-xs);
+  }
+  
+  .stat-item {
+    padding: var(--spacing-xs);
+  }
+  
+  .stat-value {
+    font-size: var(--font-lg);
+  }
+  
+  .stat-label {
+    font-size: var(--font-xs);
+  }
+  
+  .game-options {
+    grid-template-columns: 1fr;
+  }
+  
+  .game-option {
+    padding: var(--spacing-sm);
+    font-size: var(--font-sm);
+  }
+  
+  .game-sentence {
+    padding: var(--spacing-sm);
+  }
+  
+  .game-sentence .sentence-jp {
+    font-size: var(--font-md);
+  }
+  
+  .grammar-item {
+    padding: var(--spacing-sm);
+  }
+  
+  .grammar-title {
+    font-size: var(--font-base);
+  }
+  
+  .grammar-explanation {
+    font-size: var(--font-sm);
+  }
+  
+  .score-circle {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .score-number {
+    font-size: var(--font-xl);
+  }
+  
+  .tts-progress-bar {
+    min-width: 50px;
+    height: 3px;
+  }
+  
+  .progress-bar {
+    height: 18px;
+  }
+  
+  .progress-bar span {
+    font-size: var(--font-xs);
+  }
+  
+  .question-text p {
+    font-size: var(--font-base);
+  }
+  
+  .question-number {
+    font-size: var(--font-xs);
+  }
+  
+  footer {
+    font-size: var(--font-xs);
+    padding: var(--spacing-sm);
+  }
+  
+  .grammar-sentence-item {
+    padding: var(--spacing-sm);
+  }
+  
+  .grammar-breakdown {
+    flex-direction: column;
+    gap: var(--spacing-xs);
+  }
+  
+  .grammar-sentence-pattern {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .grammar-sentence-number {
+    font-size: var(--font-xs);
+  }
 }
 
 /* ──────────────────────────────────────────────────────────────
