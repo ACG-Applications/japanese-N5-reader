@@ -2,7 +2,7 @@
   "name": "JLPT N5 Reading & Comprehension",
   "short_name": "JLPT N5 Reader",
   "description": "Learn Japanese with Kenji's Tokyo School Days - 100 Kanji, 10 Grammar Patterns",
-  "start_url": "/japanese-N5-reader/",
+  "start_url": "./",
   "display": "standalone",
   "background_color": "#f5f5f5",
   "theme_color": "#e74c3c",
@@ -63,7 +63,7 @@
       "name": "Block 1",
       "short_name": "Block 1",
       "description": "Start from the beginning",
-      "url": "/japanese-N5-reader/?block=1",
+      "url": "./?block=1",
       "icons": [
         {
           "src": "icon-96x96.png",
@@ -76,7 +76,7 @@
       "name": "Grammar Game",
       "short_name": "Grammar Game",
       "description": "Practice identifying grammar patterns",
-      "url": "/japanese-N5-reader/?mode=game",
+      "url": "./?mode=game",
       "icons": [
         {
           "src": "icon-96x96.png",
@@ -88,6 +88,6 @@
   ],
   "related_applications": [],
   "prefer_related_applications": false,
-  "scope": "/japanese-N5-reader/",
+  "scope": "./",
   "id": "jlpt-n5-reader"
 }

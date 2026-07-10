@@ -8,16 +8,16 @@
     <!-- ============================================================
     PWA CONFIGURATION
     ============================================================ -->
-    
+
     <!-- Manifest for PWA -->
-    <link rel="manifest" href="/japanese-N5-reader/manifest.json" />
-    
+    <link rel="manifest" href="./manifest.json" />
+
     <!-- Theme color for browser -->
     <meta name="theme-color" content="#e74c3c" />
-    
+
     <!-- Apple touch icon for iOS -->
-    <link rel="apple-touch-icon" href="/japanese-N5-reader/icon-192x192.png" />
-    
+    <link rel="apple-touch-icon" href="./icon-192x192.png" />
+
     <!-- Windows tile color -->
     <meta name="msapplication-TileColor" content="#e74c3c" />
 
@@ -28,7 +28,7 @@
     />
 
     <!-- Stylesheet -->
-    <link rel="stylesheet" href="/japanese-N5-reader/style.css" />
+    <link rel="stylesheet" href="./style.css" />
 
     <!-- Favicon -->
     <link
@@ -38,14 +38,18 @@
 
     <!-- Service Worker registration -->
     <script>
-      if ('serviceWorker' in navigator) {
-        window.addEventListener('load', function() {
-          navigator.serviceWorker.register('/japanese-N5-reader/sw.js')
-            .then(function(registration) {
-              console.log('✅ Service Worker registered successfully:', registration.scope);
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", function () {
+          navigator.serviceWorker
+            .register("./sw.js")
+            .then(function (registration) {
+              console.log(
+                "✅ Service Worker registered successfully:",
+                registration.scope,
+              );
             })
-            .catch(function(error) {
-              console.log('❌ Service Worker registration failed:', error);
+            .catch(function (error) {
+              console.log("❌ Service Worker registration failed:", error);
             });
         });
       }
@@ -76,20 +80,55 @@
           </div>
         </div>
 
-        <div class="block-selector-wrapper">
-          <label for="block-selector">Block:</label>
-          <select id="block-selector">
-            <option value="1">1: The 65-Year-Old Student</option>
-            <option value="2">2: The Daily Morning Walk</option>
-            <option value="3">3: Navigating the Classroom</option>
-            <option value="4">4: Finding a New Apartment</option>
-            <option value="5">5: The Language Lessons Begin</option>
-            <option value="6">6: Studying Hard in Class</option>
-            <option value="7">7: Buying Coffee and Counting Change</option>
-            <option value="8">8: Calling the Family Back Home</option>
-            <option value="9">9: A Rainy Commute</option>
-            <option value="10">10: After-School Socializing</option>
-          </select>
+        <div
+          style="
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+            flex-wrap: wrap;
+          "
+        >
+          <div class="block-selector-wrapper">
+            <label for="block-selector">Block:</label>
+            <select id="block-selector">
+              <option value="1">1: The 65-Year-Old Student</option>
+              <option value="2">2: The Daily Morning Walk</option>
+              <option value="3">3: Navigating the Classroom</option>
+              <option value="4">4: Finding a New Apartment</option>
+              <option value="5">5: The Language Lessons Begin</option>
+              <option value="6">6: Studying Hard in Class</option>
+              <option value="7">7: Buying Coffee and Counting Change</option>
+              <option value="8">8: Calling the Family Back Home</option>
+              <option value="9">9: A Rainy Commute</option>
+              <option value="10">10: After-School Socializing</option>
+            </select>
+          </div>
+
+          <!-- ===== HEADER BUTTONS ===== -->
+          <div style="display: flex; gap: 4px">
+            <!-- Reset Everything -->
+            <button
+              class="header-btn"
+              onclick="app.resetAll()"
+              title="Reset Everything"
+            >
+              💥
+            </button>
+
+            <!-- Help -->
+            <button class="header-btn" onclick="app.openHelp()" title="Help">
+              ❓
+            </button>
+
+            <!-- Print Full Story -->
+            <button
+              class="header-btn"
+              onclick="app.printFullStory()"
+              title="Print Full Story"
+            >
+              📄
+            </button>
+          </div>
         </div>
       </header>
 
@@ -173,8 +212,24 @@
         </div>
 
         <!-- Install Button (hidden by default, shows when PWA is installable) -->
-        <div class="controls-group" style="border-right: none; padding-right: 0;">
-          <button id="install-btn" style="display: none; background: #27ae60; color: white; border: none; border-radius: 6px; padding: 6px 14px; cursor: pointer; font-weight: 600; font-size: var(--font-sm);">
+        <div
+          class="controls-group"
+          style="border-right: none; padding-right: 0"
+        >
+          <button
+            id="install-btn"
+            style="
+              display: none;
+              background: #27ae60;
+              color: white;
+              border: none;
+              border-radius: 6px;
+              padding: 6px 14px;
+              cursor: pointer;
+              font-weight: 600;
+              font-size: var(--font-sm);
+            "
+          >
             📲 Install App
           </button>
         </div>
@@ -219,9 +274,14 @@
           <!-- Dynamically populated -->
         </section>
 
-        <!-- ── GAME ── -->
+        <!-- ── GRAMMAR DETECTIVE GAME ── -->
         <section class="game-container" id="game-container">
-          <!-- Dynamically populated -->
+          <!-- Dynamically populated by JavaScript -->
+          <div style="padding: 40px 20px; text-align: center; color: #888">
+            <p style="font-size: 20px">🎮</p>
+            <p style="font-weight: 500">Loading Grammar Detective...</p>
+            <p style="font-size: 14px">Select a block and start playing!</p>
+          </div>
         </section>
 
         <!-- ── PROGRESS ── -->
@@ -264,7 +324,7 @@
     ============================================================ -->
 
     <!-- 1. DATA (MUST LOAD FIRST - ONLY ONCE) -->
-    <script src="/japanese-N5-reader/data.js"></script>
+    <script src="./data.js"></script>
 
     <!-- Verify data loaded -->
     <script>
@@ -279,29 +339,32 @@
       } else {
         console.error("❌ data.js failed to load!");
         document.body.innerHTML = `
-            <div style="padding: 40px; text-align: center; font-family: sans-serif;">
-                <h1 style="color: #e74c3c;">⚠️ Data Load Error</h1>
-                <p>data.js failed to load. Please check the file exists and is valid.</p>
-                <p style="color: #666; font-size: 14px;">Check the console for more details.</p>
-            </div>
-        `;
+                <div style="padding: 40px; text-align: center; font-family: sans-serif;">
+                    <h1 style="color: #e74c3c;">⚠️ Data Load Error</h1>
+                    <p>data.js failed to load. Please check the file exists and is valid.</p>
+                    <p style="color: #666; font-size: 14px;">Check the console for more details.</p>
+                    <button onclick="location.reload()" style="padding: 10px 20px; background: #e74c3c; color: white; border: none; border-radius: 4px; cursor: pointer; margin-top: 10px;">
+                        🔄 Refresh
+                    </button>
+                </div>
+            `;
       }
     </script>
 
     <!-- 2. FURIGANA ENGINE -->
-    <script src="/japanese-N5-reader/furigana.js"></script>
+    <script src="./furigana.js"></script>
 
     <!-- 3. GRAMMAR PATTERN DETECTOR -->
-    <script src="/japanese-N5-reader/grammar-patterns.js"></script>
+    <script src="./grammar-patterns.js"></script>
 
     <!-- 4. ANALYTICS -->
-    <script src="/japanese-N5-reader/analytics.js"></script>
+    <script src="./analytics.js"></script>
 
     <!-- 5. GRAMMAR GAME -->
-    <script src="/japanese-N5-reader/grammar-game.js"></script>
+    <script src="./grammar-game.js"></script>
 
     <!-- 6. MAIN APP (LOAD LAST) -->
-    <script src="/japanese-N5-reader/app.js"></script>
+    <script src="./app.js"></script>
 
     <!-- ============================================================
     INITIALIZATION CHECK
@@ -367,34 +430,34 @@
       // PWA Install Prompt
       let deferredPrompt;
 
-      window.addEventListener('beforeinstallprompt', (e) => {
+      window.addEventListener("beforeinstallprompt", (e) => {
         e.preventDefault();
         deferredPrompt = e;
-        console.log('✅ App can be installed');
-        
+        console.log("✅ App can be installed");
+
         // Show install button
-        const installBtn = document.getElementById('install-btn');
+        const installBtn = document.getElementById("install-btn");
         if (installBtn) {
-          installBtn.style.display = 'inline-block';
-          installBtn.textContent = '📲 Install App';
+          installBtn.style.display = "inline-block";
+          installBtn.textContent = "📲 Install App";
         }
       });
 
       // Install button click handler
-      document.addEventListener('DOMContentLoaded', function() {
-        const installBtn = document.getElementById('install-btn');
+      document.addEventListener("DOMContentLoaded", function () {
+        const installBtn = document.getElementById("install-btn");
         if (installBtn) {
-          installBtn.addEventListener('click', function() {
+          installBtn.addEventListener("click", function () {
             if (deferredPrompt) {
               deferredPrompt.prompt();
               deferredPrompt.userChoice.then((choiceResult) => {
-                if (choiceResult.outcome === 'accepted') {
-                  console.log('✅ User accepted install');
+                if (choiceResult.outcome === "accepted") {
+                  console.log("✅ User accepted install");
                 } else {
-                  console.log('❌ User dismissed install');
+                  console.log("❌ User dismissed install");
                 }
                 deferredPrompt = null;
-                installBtn.style.display = 'none';
+                installBtn.style.display = "none";
               });
             }
           });
@@ -402,23 +465,24 @@
       });
 
       // App installed
-      window.addEventListener('appinstalled', () => {
-        console.log('✅ App installed successfully');
-        const installBtn = document.getElementById('install-btn');
+      window.addEventListener("appinstalled", () => {
+        console.log("✅ App installed successfully");
+        const installBtn = document.getElementById("install-btn");
         if (installBtn) {
-          installBtn.style.display = 'none';
+          installBtn.style.display = "none";
         }
       });
 
       // Service Worker registration (already registered above, but keep for redundancy)
-      if ('serviceWorker' in navigator) {
-        window.addEventListener('load', function() {
-          navigator.serviceWorker.register('/japanese-N5-reader/sw.js')
-            .then(function(registration) {
-              console.log('✅ Service Worker registered:', registration.scope);
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", function () {
+          navigator.serviceWorker
+            .register("./sw.js")
+            .then(function (registration) {
+              console.log("✅ Service Worker registered:", registration.scope);
             })
-            .catch(function(error) {
-              console.log('❌ Service Worker registration failed:', error);
+            .catch(function (error) {
+              console.log("❌ Service Worker registration failed:", error);
             });
         });
       }
